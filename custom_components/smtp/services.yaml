@@ -4,6 +4,7 @@ notify:
     message:
       name: message
       description: 邮件内容（可以为HTML格式和使用系统模板）
+      required: true
       example: '<b>当前时间： {{now()}} </b>'
       selector:
         text:
