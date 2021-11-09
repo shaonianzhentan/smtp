@@ -1,0 +1,13 @@
+{
+    "domain": "smtp",
+    "name": "QQ\u90AE\u7BB1",
+    "version": "1.0",
+    "config_flow": true,
+    "documentation": "https://github.com/shaonianzhentan/smtp",
+    "requirements": [],
+    "codeowners": [
+        "@shaonianzhentan"
+    ],
+    "quality_scale": "internal",
+    "iot_class": "cloud_push"
+}

@@ -1,0 +1,19 @@
+{
+    "title": "QQ邮箱",
+    "config": {
+        "step": {
+            "user": {
+                "title": "QQ邮箱",
+                "description": "项目: https://github.com/shaonianzhentan/smtp",
+                "data": {
+                    "qq": "QQ号码",
+                    "code": "QQ邮箱授权码"
+                }
+            }
+        },
+        "error": {},
+        "abort": {
+            "single_instance_allowed": "仅允许单个配置."
+        }
+    }
+}
