@@ -2,6 +2,7 @@ from homeassistant.helpers import template
 import logging
 
 _LOGGER = logging.getLogger(__name__)
+from .const import DOMAIN
 
 # ----------邮件相关---------- #
 from email import encoders
@@ -23,8 +24,8 @@ class QQMail:
         self.from_addr = f'{from_addr}@qq.com'
         self.password = password
         # 设置QQ邮箱通知服务
-        if hass.services.has_service('notify', 'qqmail') == False:
-            hass.services.async_register('notify', 'qqmail', self.notify)
+        if hass.services.has_service(DOMAIN, 'notify') == False:
+            hass.services.async_register(DOMAIN, 'notify', self.notify)
 
     # 发送邮件
     def sendMail(self, to_addr, title, message):
@@ -53,7 +54,7 @@ class QQMail:
             email = [ email ]
         title = data.get('title', '')
         message = self.template(data.get('message', ''))
-        self.sendMail(email, _title, _message)
+        self.sendMail(email, title, message)
 
     # 模板解析
     def template(self, _message):

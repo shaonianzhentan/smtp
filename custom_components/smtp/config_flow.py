@@ -9,7 +9,7 @@ from homeassistant.data_entry_flow import FlowResult
 from .const import DOMAIN
 
 DATA_SCHEMA = vol.Schema({
-    vol.Required("qq"): int,
+    vol.Required("qq"): str,
     vol.Required("code"): str
 })
 

@@ -1,15 +1,15 @@
-qqmail:
+notify:
   description: QQ邮件通知提醒
   fields:
-    title:
-      name: 邮件标题
-      description: 邮件标题
-      example: 消息来自HomeAssistant
-      selector:
-        text:
     message:
       name: 邮件内容
       description: 要提醒的文字（可以为HTML格式和使用系统模板）
       example: '<b>当前时间： {{now()}} </b>'
+      selector:
+        text:
+    title:
+      name: 邮件标题
+      description: 邮件标题
+      example: 消息来自HomeAssistant
       selector:
         text:
