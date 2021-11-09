@@ -4,13 +4,17 @@ import homeassistant.helpers.config_validation as cv
 
 from .const import DOMAIN, PLATFORMS
 
+from .qqmail import QQMail
+unique_id = DOMAIN + '-qqmail'
+
 CONFIG_SCHEMA = cv.deprecated(DOMAIN)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    print('安装', entry)
+    cfg = entry.data
+    hass.data[unique_id] = QQMail(hass, cfg['qq'], cfg['code'])
     return True
 
-
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    print('更新', entry)
+    cfg = entry.data
+    hass.data[unique_id] = QQMail(hass, cfg['qq'], cfg['code'])
     return True
