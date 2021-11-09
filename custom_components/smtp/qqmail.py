@@ -52,7 +52,7 @@ class QQMail:
         email = data.get('email', self.from_addr)
         if not isinstance(email, list):
             email = [ email ]
-        title = data.get('title', '')
+        title = data.get('title', '消息来自HomeAssistant')
         message = self.template(data.get('message', ''))
         self.sendMail(email, title, message)
 
