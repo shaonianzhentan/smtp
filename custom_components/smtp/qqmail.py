@@ -27,34 +27,26 @@ class QQMail:
         if hass.services.has_service(DOMAIN, 'notify') == False:
             hass.services.async_register(DOMAIN, 'notify', self.notify)
 
-    # 发送邮件
-    def sendMail(self, to_addr, title, message):
+    # 通知服务
+    def notify(self, call):
+        data = call.data
+        title = data.get('title', '消息来自HomeAssistant')
+        message = self.template(data.get('message', ''))
         try:
-            from_addr = self.from_addr
+            password = self.password
+            to_addr = from_addr = self.from_addr
             smtp_server = 'smtp.qq.com'
             msg = MIMEText(message, 'html', 'utf-8')
             msg['From'] = _format_addr('HomeAssistant <%s>' % from_addr)
-            #msg['To'] = _format_addr('智能家居 <%s>' % to_addr)
-            msg['To'] = ','.join(to_addr)
+            msg['To'] = _format_addr('HomeAssistant <%s>' % to_addr)
             msg['Subject'] = Header(title, 'utf-8').encode()
             server = smtplib.SMTP(smtp_server, 25)
             server.set_debuglevel(1)
-            server.login(from_addr, self.password)
+            server.login(from_addr, password)
             server.sendmail(from_addr, to_addr, msg.as_string())
             server.quit()
         except Exception as e:
             _LOGGER.error(e)
-
-    # 通知服务
-    def notify(self, call):
-        data = call.data
-        # 读取收件人
-        email = data.get('email', self.from_addr)
-        if not isinstance(email, list):
-            email = [ email ]
-        title = data.get('title', '消息来自HomeAssistant')
-        message = self.template(data.get('message', ''))
-        self.sendMail(email, title, message)
 
     # 模板解析
     def template(self, _message):
