@@ -3,7 +3,7 @@
     "config": {
         "step": {
             "user": {
-                "description": "QQ邮箱授权码获取方式: https://service.mail.qq.com/cgi-bin/help?subtype=1&id=28&no=1001256",
+                "description": "QQ邮箱授权码获取方式:\nhttps://service.mail.qq.com/cgi-bin/help?subtype=1&id=28&no=1001256",
                 "data": {
                     "qq": "QQ号码",
                     "code": "QQ邮箱授权码"
