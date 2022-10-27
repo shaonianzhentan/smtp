@@ -1,4 +1,3 @@
-from homeassistant.helpers import template
 import logging
 
 _LOGGER = logging.getLogger(__name__)
@@ -23,18 +22,20 @@ class QQMail:
         self.hass = hass
         self.from_addr = f'{from_addr}@qq.com'
         self.password = password
-        # 设置QQ邮箱通知服务
-        if hass.services.has_service(DOMAIN, 'notify') == False:
-            hass.services.async_register(DOMAIN, 'notify', self.notify)
 
     # 通知服务
     def notify(self, call):
         data = call.data
         title = data.get('title', '消息来自HomeAssistant')
-        message = self.template(data.get('message', ''))
+        message = data.get('message', '')
+        email = data.get('email', self.from_addr)
+        self.send(title, message, email)
+
+    # 发送
+    def send(self, title, message, to_addr):
         try:
             password = self.password
-            to_addr = from_addr = self.from_addr
+            from_addr = self.from_addr
             smtp_server = 'smtp.qq.com'
             msg = MIMEText(message, 'html', 'utf-8')
             msg['From'] = _format_addr('HomeAssistant <%s>' % from_addr)
@@ -45,11 +46,17 @@ class QQMail:
             server.login(from_addr, password)
             server.sendmail(from_addr, to_addr, msg.as_string())
             server.quit()
+            return True
         except Exception as e:
             _LOGGER.error(e)
+            return False
 
-    # 模板解析
-    def template(self, _message):
-        tpl = template.Template(_message, self.hass)
-        _message = tpl.async_render(None)
-        return _message
+    # 加载
+    def load(self):
+        # 设置QQ邮箱通知服务
+        if self.hass.services.has_service(DOMAIN, 'notify') == False:
+            self.hass.services.async_register(DOMAIN, 'notify', self.notify)
+
+    # 卸载
+    def unload(self):
+        self.hass.services.remove(DOMAIN, 'notify')

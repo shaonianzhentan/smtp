@@ -11,10 +11,12 @@ CONFIG_SCHEMA = cv.deprecated(DOMAIN)
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     cfg = entry.data
-    hass.data[unique_id] = QQMail(hass, cfg['qq'], cfg['code'])
+    qm = QQMail(hass, cfg['qq'], cfg['code'])
+    qm.load()
+    hass.data[unique_id] = qm
     return True
 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    cfg = entry.data
-    hass.data[unique_id] = QQMail(hass, cfg['qq'], cfg['code'])
+    hass.data[unique_id].unload()
+    del hass.data[unique_id]
     return True

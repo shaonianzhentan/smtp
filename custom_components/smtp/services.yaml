@@ -2,15 +2,21 @@ notify:
   description: QQ邮件通知提醒
   fields:
     message:
-      name: message
+      name: Message
       description: 邮件内容（可以为HTML格式和使用系统模板）
       required: true
       example: '<b>当前时间： {{now()}} </b>'
       selector:
         text:
     title:
-      name: title
+      name: Title
       description: 邮件标题
       example: 消息来自HomeAssistant
+      selector:
+        text:
+    email:
+      name: Email
+      description: 邮箱地址
+      example: 635147515@qq.com
       selector:
         text:
