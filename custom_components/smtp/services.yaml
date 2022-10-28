@@ -16,7 +16,7 @@ notify:
         text:
     email:
       name: Email
-      description: 邮箱地址
+      description: 邮箱地址，发送多个以英文逗号,分隔
       example: 635147515@qq.com
       selector:
         text:

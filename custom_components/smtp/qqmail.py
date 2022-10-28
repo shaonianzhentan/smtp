@@ -34,17 +34,19 @@ class QQMail:
     # 发送
     def send(self, title, message, to_addr):
         try:
+            tolist = list(map(lambda x: x.strip(), to_addr.split(',')))
+            
             password = self.password
             from_addr = self.from_addr
             smtp_server = 'smtp.qq.com'
             msg = MIMEText(message, 'html', 'utf-8')
             msg['From'] = _format_addr('HomeAssistant <%s>' % from_addr)
-            msg['To'] = _format_addr('HomeAssistant <%s>' % to_addr)
+            msg['To'] = ','.join(tolist)
             msg['Subject'] = Header(title, 'utf-8').encode()
             server = smtplib.SMTP(smtp_server, 25)
             server.set_debuglevel(1)
             server.login(from_addr, password)
-            server.sendmail(from_addr, to_addr, msg.as_string())
+            server.sendmail(from_addr, tolist, msg.as_string())
             server.quit()
             return True
         except Exception as e:
