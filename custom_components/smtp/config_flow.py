@@ -44,7 +44,7 @@ class SimpleConfigFlow(ConfigFlow, domain=DOMAIN):
                 + f'<br />插件版本：{manifest.version}' + '''
             <br />插件地址：https://github.com/shaonianzhentan/smtp
 
-            关注微信公众号，了解更多HomeAssistant信息
+            <br/><br/>关注微信公众号，了解更多HomeAssistant信息
             <br/><img src="https://ha.jiluxinqing.com/img/wechat-channel.png" height="160" alt="HomeAssistant家庭助理" title="HomeAssistant家庭助理">
             ''', qm.from_addr)
 
