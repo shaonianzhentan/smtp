@@ -13,12 +13,6 @@ from .manifest import manifest
 from .const import DOMAIN
 from .qqmail import QQMail
 
-
-DATA_SCHEMA = vol.Schema({
-    vol.Required("qq"): str,
-    vol.Required("code"): str
-})
-
 class SimpleConfigFlow(ConfigFlow, domain=DOMAIN):
 
     VERSION = 1
@@ -29,7 +23,11 @@ class SimpleConfigFlow(ConfigFlow, domain=DOMAIN):
         """Handle the initial step."""
         if self._async_current_entries():
             return self.async_abort(reason="single_instance_allowed")
-
+        
+        DATA_SCHEMA = vol.Schema({
+            vol.Required("qq"): str,
+            vol.Required("code"): str
+        })
         errors = {}
         if user_input is not None:
             qq = user_input['qq']
@@ -54,13 +52,10 @@ class SimpleConfigFlow(ConfigFlow, domain=DOMAIN):
                 return self.async_create_entry(title=DOMAIN, data=user_input)
             else:
                 errors['base'] = 'failed'
+                
                 DATA_SCHEMA = vol.Schema({
                     vol.Required("qq", default=qq): str,
                     vol.Required("code", default=code): str
                 })
 
         return self.async_show_form(step_id="user", data_schema=DATA_SCHEMA, errors=errors)
-
-        
-            
-        
