@@ -52,13 +52,3 @@ class QQMail:
         except Exception as e:
             _LOGGER.error(e)
             return False
-
-    # 加载
-    def load(self):
-        # 设置QQ邮箱通知服务
-        if self.hass.services.has_service(DOMAIN, 'notify') == False:
-            self.hass.services.async_register(DOMAIN, 'notify', self.notify)
-
-    # 卸载
-    def unload(self):
-        self.hass.services.remove(DOMAIN, 'notify')

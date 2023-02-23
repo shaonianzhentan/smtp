@@ -12,6 +12,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 
 from .const import DOMAIN
+from .qqmail import QQMail
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -21,14 +22,17 @@ def get_service(
     config: ConfigType,
     discovery_info: DiscoveryInfoType | None = None,
 ) -> SmtpNotificationService:
-    print(config)
-    return SmtpNotificationService(hass)
+    return SmtpNotificationService(hass, discovery_info)
 
 
 class SmtpNotificationService(BaseNotificationService):
 
-    def __init__(self, hass):
+    def __init__(self, hass, config):
         self.hass = hass
+        self.qm = QQMail(hass, config['qq'], config['code'])
+        # 设置QQ邮箱通知服务
+        if hass.services.has_service(DOMAIN, 'notify') == False:
+            hass.services.async_register(DOMAIN, 'notify', self.qm.notify)
 
     def send_message(self, message, **kwargs):
         """Send a message."""
