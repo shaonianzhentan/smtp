@@ -42,5 +42,4 @@ class SmtpNotificationService(BaseNotificationService):
         if url is not None:
             message = f'<a href="{url}">{message}</a>'
 
-        qqmail = self.hass.data.get(DOMAIN)
-        qqmail.send(title, message, qqmail.from_addr)
+        self.qm.send(title, message, self.qm.from_addr)
