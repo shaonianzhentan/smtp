@@ -1,7 +1,6 @@
 import logging
 
 _LOGGER = logging.getLogger(__name__)
-from .const import DOMAIN
 
 # ----------邮件相关---------- #
 from email import encoders
@@ -26,8 +25,8 @@ class QQMail:
     # 通知服务
     def notify(self, call):
         data = call.data
-        title = data.get('title', '消息来自HomeAssistant')
-        message = data.get('message', '')
+        title = str(data.get('title', '消息来自HomeAssistant'))
+        message = str(data.get('message', ''))
         email = data.get('email', self.from_addr)
         self.send(title, message, email)
 
