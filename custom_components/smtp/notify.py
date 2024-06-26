@@ -6,6 +6,7 @@ import logging
 from homeassistant.components.notify import (
     ATTR_DATA,
     ATTR_TITLE,
+    ATTR_TARGET,
     BaseNotificationService,
 )
 from homeassistant.core import HomeAssistant
@@ -30,9 +31,11 @@ class SmtpNotificationService(BaseNotificationService):
     def send_message(self, message, **kwargs):
         """Send a message."""
         data = kwargs.get(ATTR_DATA) or {}
+        target = kwargs.get(ATTR_TARGET) or []
         title = kwargs.get(ATTR_TITLE, message)
+
         url = data.get('url')
         if url is not None:
             message = f'<a href="{url}">{message}</a>'
-
-        self.qm.send(title, message, self.qm.from_addr)
+        
+        self.qm.send(title, message, target)

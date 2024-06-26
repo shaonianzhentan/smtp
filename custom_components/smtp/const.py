@@ -1,2 +1,0 @@
-DOMAIN = "smtp"
-PLATFORMS = ["notify"]

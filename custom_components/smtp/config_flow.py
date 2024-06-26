@@ -10,7 +10,7 @@ from homeassistant.data_entry_flow import FlowResult
 from homeassistant.helpers.network import get_url
 from .manifest import manifest
 
-from .const import DOMAIN
+DOMAIN = manifest.domain
 from .qqmail import QQMail
 
 class SimpleConfigFlow(ConfigFlow, domain=DOMAIN):
@@ -46,7 +46,7 @@ class SimpleConfigFlow(ConfigFlow, domain=DOMAIN):
 
             <br/><br/>关注微信公众号，了解更多HomeAssistant信息
             <br/><img src="https://ha.jiluxinqing.com/img/wechat-channel.png" height="160" alt="HomeAssistant家庭助理" title="HomeAssistant家庭助理">
-            ''', qm.from_addr)
+            ''')
 
             if result == True:
                 return self.async_create_entry(title=DOMAIN, data=user_input)

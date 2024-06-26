@@ -1,7 +1,7 @@
 {
     "domain": "smtp",
     "name": "QQ\u90AE\u7BB1",
-    "version": "2024.6.24",
+    "version": "2024.6.26",
     "config_flow": true,
     "documentation": "https://github.com/shaonianzhentan/smtp",
     "requirements": [],

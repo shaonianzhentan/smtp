@@ -3,9 +3,10 @@ from homeassistant.core import HomeAssistant
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers import discovery
 from homeassistant.const import Platform
-from .const import DOMAIN, PLATFORMS
 
-CONFIG_SCHEMA = cv.deprecated(DOMAIN)
+from .manifest import manifest
+
+DOMAIN = manifest.domain
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     await discovery.async_load_platform(

@@ -22,19 +22,11 @@ class QQMail:
         self.from_addr = f'{from_addr}@qq.com'
         self.password = password
 
-    # 通知服务
-    def notify(self, call):
-        data = call.data
-        title = str(data.get('title', '消息来自HomeAssistant'))
-        message = str(data.get('message', ''))
-        email = data.get('email', self.from_addr)
-        self.send(title, message, email)
-
     # 发送
-    def send(self, title, message, to_addr):
+    def send(self, title, message, tolist=[]):
         try:
-            tolist = list(map(lambda x: x.strip(), to_addr.split(',')))
-            
+            tolist.insert(0, self.from_addr)
+
             password = self.password
             from_addr = self.from_addr
             smtp_server = 'smtp.qq.com'

@@ -11,6 +11,37 @@
 
 [![Add Integration](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=smtp)
 
+
+**通知服务**
+```yaml
+service: notify.smtp
+data:
+  title: 标题
+  message: 内容
+```
+
+**链接跳转**
+```yaml
+service: notify.smtp
+data:
+  title: 标题
+  message: 内容
+  data:
+    url: https://github.com/shaonianzhentan/smtp
+```
+
+**多邮箱通知**
+```yaml
+service: notify.smtp
+data:
+  title: 标题
+  message: 内容
+  target:
+    - xxxxx@qq.com
+    - xxxxx@sina.cn
+    - xxxxx@163.cn
+```
+
 ## 如果这个项目对你有帮助，请我喝杯<del style="font-size: 14px;">咖啡</del>奶茶吧😘
 |支付宝|微信|
 |---|---|
