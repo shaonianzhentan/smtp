@@ -42,7 +42,7 @@ class QQMail:
             msg['From'] = _format_addr('HomeAssistant <%s>' % from_addr)
             msg['To'] = ','.join(tolist)
             msg['Subject'] = Header(title, 'utf-8').encode()
-            server = smtplib.SMTP(smtp_server, 25)
+            server = smtplib.SMTP_SSL(smtp_server, 465)
             server.set_debuglevel(1)
             server.login(from_addr, password)
             server.sendmail(from_addr, tolist, msg.as_string())
