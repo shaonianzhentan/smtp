@@ -11,6 +11,28 @@
 
 [![Add Integration](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=smtp)
 
+** 发送给自己 **
+
+```yaml
+action: notify.smtp
+data:
+  title: 多个邮件发送
+  message: 消息内容
+```
+
+** 多个邮件发送 **
+
+```yaml
+action: notify.smtp
+data:
+  target:
+    - xxx@qq.com
+    - xxx@sina.com
+    - xxx@msn.com
+  title: 多个邮件发送
+  message: 消息内容
+```
+
 ## 如果这个项目对你有帮助，请我喝杯<del style="font-size: 14px;">咖啡</del>奶茶吧😘
 |支付宝|微信|
 |---|---|
