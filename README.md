@@ -11,7 +11,7 @@
 
 [![Add Integration](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start?domain=smtp)
 
-** 发送给自己 **
+**发送给自己**
 
 ```yaml
 action: notify.smtp
@@ -20,7 +20,7 @@ data:
   message: 消息内容
 ```
 
-** 多个邮件发送 **
+**多个邮件发送**
 
 ```yaml
 action: notify.smtp
